@@ -6,7 +6,7 @@ lazy val scala211 = "2.11.12"
 lazy val supportedScalaVersions = List(scala213, scala212, scala211)
 
 ThisBuild / organization := "dev.marksman"
-ThisBuild / version := "0.1.0"
+ThisBuild / version := "0.1.1-SNAPSHOT"
 ThisBuild / scalaVersion := scala211
 
 homepage := Some(url("https://github.com/kschuetz/kraftwerk-scala"))
