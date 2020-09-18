@@ -9,8 +9,25 @@ ThisBuild / organization := "dev.marksman"
 ThisBuild / version := "0.1.0-SNAPSHOT"
 ThisBuild / scalaVersion := scala211
 
+homepage := Some(url("https://github.com/kschuetz/kraftwerk-scala"))
+scmInfo := Some(ScmInfo(url("https://github.com/kschuetz/kraftwerk-scala"),
+  "git@github.com:kschuetz/kraftwerk-scala.git"))
+developers := List(Developer("kschuetz",
+  "Kevin Schuetz",
+  "schuetzk@gmail.com",
+  url("https://github.com/kschuetz")))
+licenses += ("The MIT License (MIT)", url("http://choosealicense.com/licenses/mit"))
+publishMavenStyle := true
+
 crossScalaVersions := supportedScalaVersions
 
 libraryDependencies += "dev.marksman" % "kraftwerk" % "0.9.1"
 
 scalacOptions ++= Seq("-target:jvm-1.8")
+
+publishTo := Some(
+  if (isSnapshot.value)
+    Opts.resolver.sonatypeSnapshots
+  else
+    Opts.resolver.sonatypeStaging
+)
