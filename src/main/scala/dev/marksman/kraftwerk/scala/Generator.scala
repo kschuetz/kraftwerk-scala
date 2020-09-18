@@ -16,16 +16,16 @@ class Generator[A](val toJava: JGenerator[A]) {
     toJava.run.toScala
 
   def map[B](f: A => B): Generator[B] =
-    toJava.fmap(a => f(a)).toScala
+    toJava.fmap[B](fn1(a => f(a))).toScala
 
   def flatMap[B](f: A => Generator[B]): Generator[B] =
-    toJava.flatMap(a => f(a).toJava).toScala
+    toJava.flatMap[B](fn1(a => f(a).toJava)).toScala
 
   def pair: Generator[(A, A)] =
-    toJava.pair.fmap(t => (t._1, t._2)).toScala
+    toJava.pair.fmap[(A, A)](fn1(t => t.toScala)).toScala
 
   def triple: Generator[(A, A, A)] =
-    toJava.triple.fmap(t => (t._1, t._2, t._3)).toScala
+    toJava.triple.fmap[(A, A, A)](fn1(t => t.toScala)).toScala
 
   def weighted: Weighted[Generator[A]] =
     Weighted.weighted(1, this)
@@ -34,12 +34,12 @@ class Generator[A](val toJava: JGenerator[A]) {
     Weighted.weighted(weight, this)
 
   def option: Generator[Option[A]] =
-    toJava.maybe().fmap(a => a.toScala).toScala
+    toJava.maybe().fmap[Option[A]](fn1(a => a.toScala)).toScala
 
   def vector: Generator[Vector[A]] = {
-    val inner = Generators.sized { size =>
+    val inner = Generators.sized[Vector[A]](fn1 { size =>
       Generators.aggregate(CollectionAdapters.vectorAggregator[A], size, toJava)
-    }
+    })
     inner.toScala
   }
 }
