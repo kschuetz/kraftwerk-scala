@@ -2,7 +2,7 @@ package dev.marksman.kraftwerk
 
 import dev.marksman.kraftwerk.{FloatingPointGenerator => JFloatingPointGenerator, Generator => JGenerator, ValueSupply => JValueSupply}
 
-package object scala {
+package object scala extends LambdaAdapters {
 
   implicit class GeneratorWrapper[A](underlying: JGenerator[A]) {
     def toScala: Generator[A] = new Generator(underlying)

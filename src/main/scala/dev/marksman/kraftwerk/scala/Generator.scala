@@ -34,7 +34,7 @@ class Generator[A](val toJava: JGenerator[A]) {
     Weighted.weighted(weight, this)
 
   def option: Generator[Option[A]] =
-    toJava.maybe().fmap(a => Lambda.maybeToOption(a)).toScala
+    toJava.maybe().fmap(a => a.toScala).toScala
 
   def vector: Generator[Vector[A]] = {
     val inner = Generators.sized { size =>
