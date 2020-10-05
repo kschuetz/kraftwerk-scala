@@ -73,6 +73,30 @@ trait BuiltInGenerators {
   def generateChar(range: CharRange): Generator[Char] =
     JGenerators.generateChar(range).toScala.asInstanceOf[Generator[Char]]
 
+  def generateAlphaChar: Generator[Char] =
+    JGenerators.generateAlphaChar.toScala.asInstanceOf[Generator[Char]]
+
+  def generateAlphaUpperChar: Generator[Char] =
+    JGenerators.generateAlphaUpperChar.toScala.asInstanceOf[Generator[Char]]
+
+  def generateAlphaLowerChar: Generator[Char] =
+    JGenerators.generateAlphaLowerChar.toScala.asInstanceOf[Generator[Char]]
+
+  def generateAlphanumericChar: Generator[Char] =
+    JGenerators.generateAlphanumericChar.toScala.asInstanceOf[Generator[Char]]
+
+  def generateNumericChar: Generator[Char] =
+    JGenerators.generateNumericChar.toScala.asInstanceOf[Generator[Char]]
+
+  def generatePunctuationChar: Generator[Char] =
+    JGenerators.generatePunctuationChar.toScala.asInstanceOf[Generator[Char]]
+
+  def generateAsciiPrintableChar: Generator[Char] =
+    JGenerators.generateAsciiPrintableChar.toScala.asInstanceOf[Generator[Char]]
+
+  def generateControlChar: Generator[Char] =
+    JGenerators.generateControlChar.toScala.asInstanceOf[Generator[Char]]
+
   def generateGaussian: Generator[Double] =
     JGenerators.generateGaussian.toScala.asInstanceOf[Generator[Double]]
 
@@ -520,5 +544,77 @@ trait BuiltInGenerators {
     })
   }
 
+  def generateString: Generator[String] =
+    JGenerators.generateString.toScala
 
+  //    TODO:
+  //  def generateString(length: Int): Generator[String] =
+  //    JGenerators.generateString(length).toScala
+  //
+  // TODO:
+  //  def generateString(lengthRange: IntRange): Generator[String] =
+  //    JGenerators.generateString(lengthRange).toScala
+
+  def generateString(numberOfChunks: Int, chunkGenerator: Generator[String]): Generator[String] =
+    JGenerators.generateString(numberOfChunks, chunkGenerator.toJava).toScala
+
+  def generateString(numberOfChunksRange: IntRange, chunkGenerator: Generator[String]): Generator[String] =
+    JGenerators.generateString(numberOfChunksRange, chunkGenerator.toJava).toScala
+
+  def generateStringFromCharacters(chars: Generator[Character]): Generator[String] =
+    JGenerators.generateStringFromCharacters(chars.toJava).toScala
+
+  def generateStringFromCharacters(length: Int, chars: Generator[Character]): Generator[String] =
+    JGenerators.generateStringFromCharacters(length, chars.toJava).toScala
+
+  def generateStringFromCharacters(lengthRange: IntRange, chars: Generator[Character]): Generator[String] =
+    JGenerators.generateStringFromCharacters(lengthRange, chars.toJava).toScala
+
+  def generateString(first: Generator[String], more: Generator[String]*): Generator[String] =
+    JGenerators.generateString(first.toJava, more.map(_.toJava): _*).toScala
+
+  def generateIdentifier: Generator[String] =
+    JGenerators.generateIdentifier.toScala
+
+  def generateIdentifier(length: Int): Generator[String] =
+    JGenerators.generateIdentifier(length).toScala
+
+  def generateIdentifier(lengthRange: IntRange): Generator[String] =
+    JGenerators.generateIdentifier(lengthRange).toScala
+
+  def generateAlphaString: Generator[String] =
+    JGenerators.generateAlphaString.toScala
+
+  def generateAlphaString(length: Int): Generator[String] =
+    JGenerators.generateAlphaString(length).toScala
+
+  def generateAlphaString(lengthRange: IntRange): Generator[String] =
+    JGenerators.generateAlphaString(lengthRange).toScala
+
+  def generateAlphaUpperString: Generator[String] =
+    JGenerators.generateAlphaUpperString.toScala
+
+  def generateAlphaUpperString(length: Int): Generator[String] =
+    JGenerators.generateAlphaUpperString(length).toScala
+
+  def generateAlphaUpperString(lengthRange: IntRange): Generator[String] =
+    JGenerators.generateAlphaUpperString(lengthRange).toScala
+
+  def generateAlphaLowerString: Generator[String] =
+    JGenerators.generateAlphaLowerString.toScala
+
+  def generateAlphaLowerString(length: Int): Generator[String] =
+    JGenerators.generateAlphaLowerString(length).toScala
+
+  def generateAlphaLowerString(lengthRange: IntRange): Generator[String] =
+    JGenerators.generateAlphaLowerString(lengthRange).toScala
+
+  def generateAlphanumericString: Generator[String] =
+    JGenerators.generateAlphanumericString.toScala
+
+  def generateAlphanumericString(length: Int): Generator[String] =
+    JGenerators.generateAlphanumericString(length).toScala
+
+  def generateAlphanumericString(lengthRange: IntRange): Generator[String] =
+    JGenerators.generateAlphanumericString(lengthRange).toScala
 }
