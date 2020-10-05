@@ -126,29 +126,21 @@ trait BuiltInGenerators {
         def checkedApply(a: A, b: B): Out = combine(a, b)
       }).toScala
 
-  def generateProduct[A, B, C, Out](a: Generator[A],
-                                    b: Generator[B],
-                                    c: Generator[C],
+  def generateProduct[A, B, C, Out](a: Generator[A], b: Generator[B], c: Generator[C],
                                     combine: (A, B, C) => Out): Generator[Out] =
     JGenerators.generateProduct(a.toJava, b.toJava, c.toJava,
       new Fn3[A, B, C, Out] {
         def checkedApply(a: A, b: B, c: C): Out = combine(a, b, c)
       }).toScala
 
-  def generateProduct[A, B, C, D, Out](a: Generator[A],
-                                       b: Generator[B],
-                                       c: Generator[C],
-                                       d: Generator[D],
+  def generateProduct[A, B, C, D, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
                                        combine: (A, B, C, D) => Out): Generator[Out] =
     JGenerators.generateProduct(a.toJava, b.toJava, c.toJava, d.toJava,
       new Fn4[A, B, C, D, Out] {
         def checkedApply(a: A, b: B, c: C, d: D): Out = combine(a, b, c, d)
       }).toScala
 
-  def generateProduct[A, B, C, D, E, Out](a: Generator[A],
-                                          b: Generator[B],
-                                          c: Generator[C],
-                                          d: Generator[D],
+  def generateProduct[A, B, C, D, E, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
                                           e: Generator[E],
                                           combine: (A, B, C, D, E) => Out): Generator[Out] =
     JGenerators.generateProduct(a.toJava, b.toJava, c.toJava, d.toJava, e.toJava,
@@ -156,123 +148,377 @@ trait BuiltInGenerators {
         def checkedApply(a: A, b: B, c: C, d: D, e: E): Out = combine(a, b, c, d, e)
       }).toScala
 
-  def generateProduct[A, B, C, D, E, F, Out](a: Generator[A],
-                                             b: Generator[B],
-                                             c: Generator[C],
-                                             d: Generator[D],
-                                             e: Generator[E],
-                                             f: Generator[F],
+  def generateProduct[A, B, C, D, E, F, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                             e: Generator[E], f: Generator[F],
                                              combine: (A, B, C, D, E, F) => Out): Generator[Out] =
     JGenerators.generateProduct(a.toJava, b.toJava, c.toJava, d.toJava, e.toJava, f.toJava,
       new Fn6[A, B, C, D, E, F, Out] {
         def checkedApply(a: A, b: B, c: C, d: D, e: E, f: F): Out = combine(a, b, c, d, e, f)
       }).toScala
 
-  def generateProduct[A, B, C, D, E, F, G, Out](a: Generator[A],
-                                                b: Generator[B],
-                                                c: Generator[C],
-                                                d: Generator[D],
-                                                e: Generator[E],
-                                                f: Generator[F],
-                                                g: Generator[G],
+  def generateProduct[A, B, C, D, E, F, G, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                e: Generator[E], f: Generator[F], g: Generator[G],
                                                 combine: (A, B, C, D, E, F, G) => Out): Generator[Out] =
     JGenerators.generateProduct(a.toJava, b.toJava, c.toJava, d.toJava, e.toJava, f.toJava, g.toJava,
       new Fn7[A, B, C, D, E, F, G, Out] {
         def checkedApply(a: A, b: B, c: C, d: D, e: E, f: F, g: G): Out = combine(a, b, c, d, e, f, g)
       }).toScala
 
-  def generateProduct[A, B, C, D, E, F, G, H, Out](a: Generator[A],
-                                                   b: Generator[B],
-                                                   c: Generator[C],
-                                                   d: Generator[D],
-                                                   e: Generator[E],
-                                                   f: Generator[F],
-                                                   g: Generator[G],
-                                                   h: Generator[H],
+  def generateProduct[A, B, C, D, E, F, G, H, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                   e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
                                                    combine: (A, B, C, D, E, F, G, H) => Out): Generator[Out] =
     JGenerators.generateProduct(a.toJava, b.toJava, c.toJava, d.toJava, e.toJava, f.toJava, g.toJava, h.toJava,
       new Fn8[A, B, C, D, E, F, G, H, Out] {
         def checkedApply(a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H): Out = combine(a, b, c, d, e, f, g, h)
       }).toScala
 
-  def generateProduct[A, B, C, D, E, F, G, H, I, Out](a: Generator[A],
-                                                      b: Generator[B],
-                                                      c: Generator[C],
-                                                      d: Generator[D],
-                                                      e: Generator[E],
-                                                      f: Generator[F],
-                                                      g: Generator[G],
-                                                      h: Generator[H],
+  def generateProduct[A, B, C, D, E, F, G, H, I, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                      e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
                                                       i: Generator[I],
                                                       combine: (A, B, C, D, E, F, G, H, I) => Out): Generator[Out] = {
-    val group1 = generateProduct[A, B, C, D, E, F, G, H, (A, B, C, D, E, F, G, H)](a, b, c, d, e, f, g, h,
-      (aa, bb, cc, dd, ee, ff, gg, hh) => (aa, bb, cc, dd, ee, ff, gg, hh))
-
-    generateProduct[(A, B, C, D, E, F, G, H), I, Out](group1, i, {
+    generateProduct[(A, B, C, D, E, F, G, H), I, Out](generateTuple(a, b, c, d, e, f, g, h), i, {
       case ((aa, bb, cc, dd, ee, ff, gg, hh), ii) => combine(aa, bb, cc, dd, ee, ff, gg, hh, ii)
     })
   }
 
-  def generateProduct[A, B, C, D, E, F, G, H, I, J, Out](a: Generator[A],
-                                                         b: Generator[B],
-                                                         c: Generator[C],
-                                                         d: Generator[D],
-                                                         e: Generator[E],
-                                                         f: Generator[F],
-                                                         g: Generator[G],
-                                                         h: Generator[H],
-                                                         i: Generator[I],
-                                                         j: Generator[J],
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                         e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                         i: Generator[I], j: Generator[J],
                                                          combine: (A, B, C, D, E, F, G, H, I, J) => Out): Generator[Out] = {
-    val group1 = generateProduct[A, B, C, D, E, F, G, H, (A, B, C, D, E, F, G, H)](a, b, c, d, e, f, g, h,
-      (aa, bb, cc, dd, ee, ff, gg, hh) => (aa, bb, cc, dd, ee, ff, gg, hh))
-    generateProduct[(A, B, C, D, E, F, G, H), I, J, Out](group1, i, j, {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, Out](generateTuple(a, b, c, d, e, f, g, h), i, j, {
       case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj) =>
         combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj)
     })
   }
 
-  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, Out](a: Generator[A],
-                                                            b: Generator[B],
-                                                            c: Generator[C],
-                                                            d: Generator[D],
-                                                            e: Generator[E],
-                                                            f: Generator[F],
-                                                            g: Generator[G],
-                                                            h: Generator[H],
-                                                            i: Generator[I],
-                                                            j: Generator[J],
-                                                            k: Generator[K],
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                            e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                            i: Generator[I], j: Generator[J], k: Generator[K],
                                                             combine: (A, B, C, D, E, F, G, H, I, J, K) => Out): Generator[Out] = {
-    val group1 = generateProduct[A, B, C, D, E, F, G, H, (A, B, C, D, E, F, G, H)](a, b, c, d, e, f, g, h,
-      (aa, bb, cc, dd, ee, ff, gg, hh) => (aa, bb, cc, dd, ee, ff, gg, hh))
-
-    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, Out](group1, i, j, k, {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, Out](generateTuple(a, b, c, d, e, f, g, h), i, j, k, {
       case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj, kk) =>
         combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk)
     })
   }
 
-  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, Out](a: Generator[A],
-                                                               b: Generator[B],
-                                                               c: Generator[C],
-                                                               d: Generator[D],
-                                                               e: Generator[E],
-                                                               f: Generator[F],
-                                                               g: Generator[G],
-                                                               h: Generator[H],
-                                                               i: Generator[I],
-                                                               j: Generator[J],
-                                                               k: Generator[K],
-                                                               l: Generator[L],
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                               e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                               i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
                                                                combine: (A, B, C, D, E, F, G, H, I, J, K, L) => Out): Generator[Out] = {
-    val group1 = generateProduct[A, B, C, D, E, F, G, H, (A, B, C, D, E, F, G, H)](a, b, c, d, e, f, g, h,
-      (aa, bb, cc, dd, ee, ff, gg, hh) => (aa, bb, cc, dd, ee, ff, gg, hh))
-
-    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, L, Out](group1, i, j, k, l, {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, L, Out](generateTuple(a, b, c, d, e, f, g, h), i, j, k, l, {
       case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj, kk, ll) =>
         combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll)
     })
   }
+
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, M, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                  e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                  i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                  m: Generator[M],
+                                                                  combine: (A, B, C, D, E, F, G, H, I, J, K, L, M) => Out): Generator[Out] = {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, L, M, Out](generateTuple(a, b, c, d, e, f, g, h), i, j, k, l, m, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj, kk, ll, mm) =>
+        combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm)
+    })
+  }
+
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, M, N, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                     e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                     i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                     m: Generator[M], n: Generator[N],
+                                                                     combine: (A, B, C, D, E, F, G, H, I, J, K, L, M, N) => Out): Generator[Out] = {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, L, M, N, Out](generateTuple(a, b, c, d, e, f, g, h), i, j, k, l, m, n, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj, kk, ll, mm, nn) =>
+        combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn)
+    })
+  }
+
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                        e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                        i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                        m: Generator[M], n: Generator[N], o: Generator[O],
+                                                                        combine: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O) => Out): Generator[Out] = {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, L, M, N, O, Out](generateTuple(a, b, c, d, e, f, g, h), i, j, k, l, m, n, o, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj, kk, ll, mm, nn, oo) =>
+        combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo)
+    })
+  }
+
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                           e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                           i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                           m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                           combine: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P) => Out): Generator[Out] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Out](generateTuple(a, b, c, d, e, f, g, h),
+      generateTuple(i, j, k, l, m, n, o, p), {
+        case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp)) =>
+          combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp)
+      })
+  }
+
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                              e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                              i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                              m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                              q: Generator[Q],
+                                                                              combine: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q) => Out): Generator[Out] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, Out](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq) =>
+        combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq)
+    })
+  }
+
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                                 e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                                 i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                                 m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                                 q: Generator[Q], r: Generator[R],
+                                                                                 combine: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R) => Out): Generator[Out] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, R, Out](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, r, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq, rr) =>
+        combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr)
+    })
+  }
+
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                                    e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                                    i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                                    m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                                    q: Generator[Q], r: Generator[R], s: Generator[S],
+                                                                                    combine: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S) => Out): Generator[Out] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, R, S, Out](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, r, s, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq, rr, ss) =>
+        combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss)
+    })
+  }
+
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                                       e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                                       i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                                       m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                                       q: Generator[Q], r: Generator[R], s: Generator[S], t: Generator[T],
+                                                                                       combine: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T) => Out): Generator[Out] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, R, S, T, Out](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, r, s, t, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq, rr, ss, tt) =>
+        combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt)
+    })
+  }
+
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                                          e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                                          i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                                          m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                                          q: Generator[Q], r: Generator[R], s: Generator[S], t: Generator[T],
+                                                                                          u: Generator[U],
+                                                                                          combine: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U) => Out): Generator[Out] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, R, S, T, U, Out](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, r, s, t, u, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq, rr, ss, tt, uu) =>
+        combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt, uu)
+    })
+  }
+
+  def generateProduct[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                                             e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                                             i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                                             m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                                             q: Generator[Q], r: Generator[R], s: Generator[S], t: Generator[T],
+                                                                                             u: Generator[U], v: Generator[V],
+                                                                                             combine: (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V) => Out): Generator[Out] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, R, S, T, U, V, Out](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, r, s, t, u, v, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq, rr, ss, tt, uu, vv) =>
+        combine(aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt, uu, vv)
+    })
+  }
+
+  def generateTuple[A, B](a: Generator[A], b: Generator[B]): Generator[(A, B)] =
+    JGenerators.generateProduct(a.toJava, b.toJava,
+      new Fn2[A, B, (A, B)] {
+        def checkedApply(a: A, b: B): (A, B) = (a, b)
+      }).toScala
+
+  def generateTuple[A, B, C](a: Generator[A], b: Generator[B], c: Generator[C]): Generator[(A, B, C)] =
+    JGenerators.generateProduct(a.toJava, b.toJava, c.toJava,
+      new Fn3[A, B, C, (A, B, C)] {
+        def checkedApply(a: A, b: B, c: C): (A, B, C) = (a, b, c)
+      }).toScala
+
+  def generateTuple[A, B, C, D](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D]): Generator[(A, B, C, D)] =
+    JGenerators.generateProduct(a.toJava, b.toJava, c.toJava, d.toJava,
+      new Fn4[A, B, C, D, (A, B, C, D)] {
+        def checkedApply(a: A, b: B, c: C, d: D): (A, B, C, D) = (a, b, c, d)
+      }).toScala
+
+  def generateTuple[A, B, C, D, E](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                   e: Generator[E]): Generator[(A, B, C, D, E)] =
+    JGenerators.generateProduct(a.toJava, b.toJava, c.toJava, d.toJava, e.toJava,
+      new Fn5[A, B, C, D, E, (A, B, C, D, E)] {
+        def checkedApply(a: A, b: B, c: C, d: D, e: E): (A, B, C, D, E) = (a, b, c, d, e)
+      }).toScala
+
+  def generateTuple[A, B, C, D, E, F](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                      e: Generator[E], f: Generator[F]): Generator[(A, B, C, D, E, F)] =
+    JGenerators.generateProduct(a.toJava, b.toJava, c.toJava, d.toJava, e.toJava, f.toJava,
+      new Fn6[A, B, C, D, E, F, (A, B, C, D, E, F)] {
+        def checkedApply(a: A, b: B, c: C, d: D, e: E, f: F): (A, B, C, D, E, F) = (a, b, c, d, e, f)
+      }).toScala
+
+  def generateTuple[A, B, C, D, E, F, G](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                         e: Generator[E], f: Generator[F], g: Generator[G]): Generator[(A, B, C, D, E, F, G)] =
+    JGenerators.generateProduct(a.toJava, b.toJava, c.toJava, d.toJava, e.toJava, f.toJava, g.toJava,
+      new Fn7[A, B, C, D, E, F, G, (A, B, C, D, E, F, G)] {
+        def checkedApply(a: A, b: B, c: C, d: D, e: E, f: F, g: G): (A, B, C, D, E, F, G) = (a, b, c, d, e, f, g)
+      }).toScala
+
+  def generateTuple[A, B, C, D, E, F, G, H](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                            e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H]): Generator[(A, B, C, D, E, F, G, H)] =
+    JGenerators.generateProduct(a.toJava, b.toJava, c.toJava, d.toJava, e.toJava, f.toJava, g.toJava, h.toJava,
+      new Fn8[A, B, C, D, E, F, G, H, (A, B, C, D, E, F, G, H)] {
+        def checkedApply(a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H): (A, B, C, D, E, F, G, H) = (a, b, c, d, e, f, g, h)
+      }).toScala
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                    e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                    i: Generator[I]): Generator[(A, B, C, D, E, F, G, H, I)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), I, (A, B, C, D, E, F, G, H, I)](generateTuple(a, b, c, d, e, f, g, h), i, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), ii) => (aa, bb, cc, dd, ee, ff, gg, hh, ii)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                       e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                       i: Generator[I], j: Generator[J]): Generator[(A, B, C, D, E, F, G, H, I, J)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, (A, B, C, D, E, F, G, H, I, J)](generateTuple(a, b, c, d, e, f, g, h), i, j, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                          e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                          i: Generator[I], j: Generator[J], k: Generator[K]): Generator[(A, B, C, D, E, F, G, H, I, J, K)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, (A, B, C, D, E, F, G, H, I, J, K)](generateTuple(a, b, c, d, e, f, g, h), i, j, k, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj, kk) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                             e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                             i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, L, (A, B, C, D, E, F, G, H, I, J, K, L)](generateTuple(a, b, c, d, e, f, g, h), i, j, k, l, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj, kk, ll) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, M, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                m: Generator[M]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L, M)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, L, M, (A, B, C, D, E, F, G, H, I, J, K, L, M)](generateTuple(a, b, c, d, e, f, g, h), i, j, k, l, m, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj, kk, ll, mm) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, M, N, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                   e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                   i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                   m: Generator[M], n: Generator[N]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L, M, N)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, L, M, N, (A, B, C, D, E, F, G, H, I, J, K, L, M, N)](generateTuple(a, b, c, d, e, f, g, h), i, j, k, l, m, n, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj, kk, ll, mm, nn) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                      e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                      i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                      m: Generator[M], n: Generator[N], o: Generator[O]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), I, J, K, L, M, N, O, (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O)](generateTuple(a, b, c, d, e, f, g, h), i, j, k, l, m, n, o, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), ii, jj, kk, ll, mm, nn, oo) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                         e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                         i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                         m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P)](generateTuple(a, b, c, d, e, f, g, h),
+      generateTuple(i, j, k, l, m, n, o, p), {
+        case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp)) =>
+          (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp)
+      })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                            e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                            i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                            m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                            q: Generator[Q]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q)](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                               e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                               i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                               m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                               q: Generator[Q], r: Generator[R]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, R, (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R)](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, r, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq, rr) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                                  e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                                  i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                                  m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                                  q: Generator[Q], r: Generator[R], s: Generator[S]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, R, S, (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S)](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, r, s, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq, rr, ss) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                                     e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                                     i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                                     m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                                     q: Generator[Q], r: Generator[R], s: Generator[S], t: Generator[T]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, R, S, T, (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T)](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, r, s, t, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq, rr, ss, tt) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                                        e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                                        i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                                        m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                                        q: Generator[Q], r: Generator[R], s: Generator[S], t: Generator[T],
+                                                                                        u: Generator[U]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, R, S, T, U, (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U)](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, r, s, t, u, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq, rr, ss, tt, uu) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt, uu)
+    })
+  }
+
+  def generateTuple[A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, Out](a: Generator[A], b: Generator[B], c: Generator[C], d: Generator[D],
+                                                                                           e: Generator[E], f: Generator[F], g: Generator[G], h: Generator[H],
+                                                                                           i: Generator[I], j: Generator[J], k: Generator[K], l: Generator[L],
+                                                                                           m: Generator[M], n: Generator[N], o: Generator[O], p: Generator[P],
+                                                                                           q: Generator[Q], r: Generator[R], s: Generator[S], t: Generator[T],
+                                                                                           u: Generator[U], v: Generator[V]): Generator[(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V)] = {
+    generateProduct[(A, B, C, D, E, F, G, H), (I, J, K, L, M, N, O, P), Q, R, S, T, U, V, (A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V)](generateTuple(a, b, c, d, e, f, g, h), generateTuple(i, j, k, l, m, n, o, p), q, r, s, t, u, v, {
+      case ((aa, bb, cc, dd, ee, ff, gg, hh), (ii, jj, kk, ll, mm, nn, oo, pp), qq, rr, ss, tt, uu, vv) =>
+        (aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt, uu, vv)
+    })
+  }
+
 
 }
