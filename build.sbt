@@ -21,7 +21,7 @@ publishMavenStyle := true
 
 crossScalaVersions := supportedScalaVersions
 
-libraryDependencies += "dev.marksman" % "kraftwerk" % "0.9.1"
+libraryDependencies += "dev.marksman" % "kraftwerk" % "0.10.0"
 
 scalacOptions ++= Seq("-target:jvm-1.8")
 
