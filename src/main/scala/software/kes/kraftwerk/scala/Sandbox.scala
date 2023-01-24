@@ -1,4 +1,4 @@
-package dev.marksman.kraftwerk.scala
+package software.kes.kraftwerk.scala
 
 object Sandbox extends BuiltInGenerators {
   def main(args: Array[String]): Unit = {

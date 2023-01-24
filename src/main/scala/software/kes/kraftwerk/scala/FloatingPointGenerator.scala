@@ -1,6 +1,6 @@
-package dev.marksman.kraftwerk.scala
+package software.kes.kraftwerk.scala
 
-import dev.marksman.kraftwerk.{FloatingPointGenerator => JFloatingPointGenerator}
+import software.kes.kraftwerk.{FloatingPointGenerator => JFloatingPointGenerator}
 
 class FloatingPointGenerator[A](val toJava: JFloatingPointGenerator[A]) {
   def withNaNs(enabled: Boolean): FloatingPointGenerator[A] =

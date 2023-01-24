@@ -1,4 +1,4 @@
-package dev.marksman.kraftwerk.scala
+package software.kes.kraftwerk.scala
 
 import com.jnape.palatable.lambda.adt.product.{Product2, Product3, Product4, Product5, Product6, Product7, Product8}
 import com.jnape.palatable.lambda.adt.{Maybe, hlist}

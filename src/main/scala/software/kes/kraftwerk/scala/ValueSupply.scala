@@ -1,6 +1,6 @@
-package dev.marksman.kraftwerk.scala
+package software.kes.kraftwerk.scala
 
-import dev.marksman.kraftwerk.{ValueSupply => JValueSupply}
+import software.kes.kraftwerk.{ValueSupply => JValueSupply}
 
 class ValueSupply[A](val toJava: JValueSupply[A]) extends Iterable[A] {
   def iterator: Iterator[A] = new ValueSupplyIterator(toJava.iterator)

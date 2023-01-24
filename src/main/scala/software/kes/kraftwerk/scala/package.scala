@@ -1,6 +1,6 @@
-package dev.marksman.kraftwerk
+package software.kes.kraftwerk
 
-import dev.marksman.kraftwerk.{FloatingPointGenerator => JFloatingPointGenerator, Generator => JGenerator, ValueSupply => JValueSupply}
+import software.kes.kraftwerk.{FloatingPointGenerator => JFloatingPointGenerator, Generator => JGenerator, Result => JResult, ValueSupply => JValueSupply}
 
 package object scala extends LambdaAdapters {
 
@@ -14,6 +14,10 @@ package object scala extends LambdaAdapters {
 
   implicit class ValueSupplyWrapper[A](underlying: JValueSupply[A]) {
     def toScala: ValueSupply[A] = new ValueSupply[A](underlying)
+  }
+
+  implicit class ResultWrapper[S, A](underlying: JResult[S, A]) {
+    def toScala: Result[S, A] = Result(underlying)
   }
 
   implicit def floatingPointGeneratorToGenerator[A](fpg: FloatingPointGenerator[A]): Generator[A] =

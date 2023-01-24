@@ -1,10 +1,11 @@
-package dev.marksman.kraftwerk.scala
+package software.kes.kraftwerk.scala
 
 import com.jnape.palatable.lambda.functions._
-import dev.marksman.kraftwerk.aggregator.Aggregator
-import dev.marksman.kraftwerk.constraints._
-import dev.marksman.kraftwerk.weights.BooleanWeights
-import dev.marksman.kraftwerk.{Seed, Generator => JGenerator, Generators => JGenerators}
+import software.kes.kraftwerk.aggregator.Aggregator
+import software.kes.kraftwerk.constraints._
+import software.kes.kraftwerk.frequency.FrequencyMap
+import software.kes.kraftwerk.weights.BooleanWeights
+import software.kes.kraftwerk.{Seed, Generator => JGenerator, Generators => JGenerators}
 
 import scala.collection.JavaConverters._
 
@@ -127,6 +128,14 @@ trait BuiltInGenerators {
     JGenerators.sizedMinimum(minimum, new Fn1[Integer, JGenerator[A]] {
       def checkedApply(a: Integer): JGenerator[A] = f(a).toJava
     }).toScala
+
+  def frequency[A](first: (Int, Generator[A]),
+                   rest: (Int, Generator[A])*): Generator[A] = {
+    val frequencyMap = rest.foldLeft(FrequencyMap.frequencyMap(first._2.toJava.weighted(first._1))) {
+      case (acc, (weight, generator)) => acc.add(generator.toJava.weighted(weight))
+    }
+    JGenerators.frequency(frequencyMap).toScala
+  }
 
   def aggregate[A, Builder, Out](aggregator: Aggregator[A, Builder, Out],
                                  elements: Iterable[Generator[A]]): Generator[Out] =
@@ -617,4 +626,20 @@ trait BuiltInGenerators {
 
   def generateAlphanumericString(lengthRange: IntRange): Generator[String] =
     JGenerators.generateAlphanumericString(lengthRange).toScala
+
+  def generateShuffled(count: Int): Generator[Vector[Int]] =
+    generateShuffled(count, identity)
+
+  def generateShuffled[A](count: Int, fn: Int => A): Generator[Vector[A]] =
+    mapToVector(JGenerators.generateShuffled(count, fn1(a => fn(a))))
+
+  def generateShuffled[A](input: Seq[A]): Generator[Vector[A]] =
+    mapToVector(JGenerators.generateShuffled(CollectionAdapters.finiteIterable(input)))
+
+  def generateShuffled[A](input: Set[A]): Generator[Vector[A]] =
+    mapToVector(JGenerators.generateShuffled(CollectionAdapters.finiteIterable(input)))
+
+  private def mapToVector[A](gen: JGenerator[software.kes.collectionviews.Vector[A]]): Generator[Vector[A]] =
+    gen.fmap[Vector[A]](fn1(a => CollectionAdapters.vectorFromJavaIterable(a))).toScala
+
 }
